@@ -27,6 +27,19 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
+def uuid7() -> uuid.UUID:
+    """Generate a time-ordered UUIDv7."""
+    import os
+    import time
+    import uuid
+    ms = int(time.time() * 1000)
+    ms_bytes = ms.to_bytes(6, byteorder='big')
+    rand_bytes = bytearray(os.urandom(10))
+    rand_bytes[0] = (rand_bytes[0] & 0x0F) | 0x70
+    rand_bytes[2] = (rand_bytes[2] & 0x3F) | 0x80
+    return uuid.UUID(bytes=ms_bytes + rand_bytes)
+
+
 # Dependency to get db session in FastAPI routes
 def get_db():
     db = SessionLocal()

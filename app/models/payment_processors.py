@@ -1,15 +1,13 @@
-from sqlalchemy import Column, String, Boolean, DateTime, Enum
-from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+from sqlalchemy import Column, String, Boolean, DateTime, Enum, UUID
 from sqlalchemy.orm import relationship
-from app.core.database import Base
-import uuid
+from app.core.database import Base, uuid7
 from datetime import datetime, timezone
 
 
 class PaymentProcessor(Base):
     __tablename__ = "payment_processors"
 
-    id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    id = Column(UUID, primary_key=True, default=uuid7, index=True)
     name = Column(String(50), unique=True, nullable=False)
     display_name = Column(String(100), nullable=False)
     is_active = Column(Boolean, default=True)

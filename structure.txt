@@ -1,26 +1,28 @@
 payment_service/
-├── app/
-│   ├── main.py
-│   ├── database.py
-│   ├── models/
-│   │   ├── user.py
-│   │   └── transaction.py
-│   ├── schemas/
-│   │   ├── payment.py
-│   │   └── transaction.py
-│   ├── payment_services/
-│   │   ├── __init__.py
+├── app/                            # Main application package
+│   ├── main.py                     # FastAPI application entry point
+│   ├── models/                     # Database models
+│   │   ├── user.py                 
+│   │   └── transaction.py          
+│   ├── schemas/                    # Pydantic schemas for request/response validation
+│   │   ├── payment.py              
+│   │   └── transaction.py          
+│   ├── services/                   # Application business logic and services
+│   │   ├── __init__.py             # Initialize services
 │   │   ├── base.py
 │   │   ├── processors.py   
 │   │   └── payment_providers.py
-│   ├── routers/
-│   │   ├── payments.py
-│   │   └── webhooks.py
-│   ├── middleware/
-│   │   └── security.py
-│   └── core/
-│       └── config.py
-├── tests/
-├── .env
-├── requirements.txt
-└── alembic/  
+│   ├── routers/                    # FastAPI routers for API endpoints
+│   │   ├── payments.py             
+│   │   └── webhooks.py             
+│   └── core/                       # Core components
+│       |── config.py               # Configuration management
+|       |── security.py             # Security utilities
+|       └── database.py             # Database connection management
+├── tests/                          # Unit and integration tests
+├── .env                            # Environment variables (production)
+├── .env.example                    # Template for environment variables
+├── .gitignore                      # Files to ignore for version control
+├── README.md                       # Project documentation
+├── requirements.txt                # Project dependencies
+└── alembic/                         # Database migration files

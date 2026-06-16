@@ -52,8 +52,18 @@ class Settings(BaseSettings):
                 raise ValueError("Insecure default SECRET_KEY cannot be used in a production environment!")
             if self.API_KEY in insecure_api_keys:
                 raise ValueError("Insecure default API_KEY cannot be used in a production environment!")
+            if not self.ESEWA_INTENT_KEY or self.ESEWA_INTENT_KEY == "dummy_esewa_key_base64":
+                raise ValueError("Insecure default or empty ESEWA_INTENT_KEY cannot be used in a production environment!")
+            if not self.ESEWA_INTENT_PRODUCT_CODE or self.ESEWA_INTENT_PRODUCT_CODE == "dummy_product_code":
+                raise ValueError("Insecure default or empty ESEWA_INTENT_PRODUCT_CODE cannot be used in a production environment!")
         return self
 
+    # eSewa Settings
+    ESEWA_INTENT_KEY: str = ""
+    ESEWA_INTENT_PRODUCT_CODE: str = ""
+    ESEWA_INTENT_BOOK_URL: str = "https://checkout.esewa.com.np/api/client/intent/payment/book"
+    ESEWA_INTENT_STATUS_URL: str = "https://checkout.esewa.com.np/api/client/intent/payment/status"
+    BACKEND_API_URL: str = "http://localhost:8000"
 
     model_config = SettingsConfigDict(
         env_file=".env",

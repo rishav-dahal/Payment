@@ -3,26 +3,23 @@ payment_service/
 │   ├── main.py                     # FastAPI application entry point
 │   ├── models/                     # Database models
 │   │   ├── user.py                 
-│   │   └── transaction.py          
-│   ├── schemas/                    # Pydantic schemas for request/response validation
-│   │   ├── payment.py              
-│   │   └── transaction.py          
-│   ├── services/                   # Application business logic and services
-│   │   ├── __init__.py             # Initialize services
-│   │   ├── base.py
-│   │   ├── processors.py   
-│   │   └── payment_providers.py
-│   ├── routers/                    # FastAPI routers for API endpoints
-│   │   ├── payments.py             
-│   │   └── webhooks.py             
+│   │   ├── payment_processors.py                 
+│   │   └── transactions.py          
+│   ├── gateways/                   # Payment gateway feature packages
+│   │   └── esewa/                  # eSewa integration package
+│   │       ├── __init__.py         
+│   │       ├── router.py           
+│   │       ├── service.py          
+│   │       └── schemas.py          
 │   └── core/                       # Core components
-│       |── config.py               # Configuration management
-|       |── security.py             # Security utilities
-|       └── database.py             # Database connection management
+│       ├── config.py               # Configuration management
+│       ├── security.py             # Security utilities
+│       ├── logging.py              # Structured logging utility
+│       └── database.py             # Database connection management
 ├── tests/                          # Unit and integration tests
 ├── .env                            # Environment variables (production)
 ├── .env.example                    # Template for environment variables
 ├── .gitignore                      # Files to ignore for version control
 ├── README.md                       # Project documentation
 ├── requirements.txt                # Project dependencies
-└── alembic/                         # Database migration files
+└── alembic/                        # Database migration files

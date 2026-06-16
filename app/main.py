@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.logging import logger
+from app.gateways.esewa import router as esewa_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -13,6 +14,9 @@ app = FastAPI(
     version="1.0.0",
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
+
+# Register Gateway-Specific Routers
+app.include_router(esewa_router, prefix=settings.API_V1_STR)
 
 # Set all CORS enabled origins
 if settings.BACKEND_CORS_ORIGINS:
